@@ -71,6 +71,7 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const deleteAllButton = document.querySelector('.delete__all');
+const editWorkoutButton = document.querySelector('.edit__workout');
 const deleteWorkoutButton = document.querySelector('.workout-delete--button');
 
 class App {
@@ -98,6 +99,8 @@ class App {
     );
 
     body.addEventListener('click', this._deleteWorkout.bind(this));
+
+    // editWorkoutButton.addEventListener('click', this._editWorkout.bind(this));
   }
 
   _getPosition() {
@@ -329,9 +332,36 @@ class App {
     });
   }
 
+  // _editWorkout() {
+  //   const editW = function (e) {
+  //     // guard clause
+  //     if (!e.target.closest('.workout')) return;
+
+  //     const workoutEl = e.target.closest('.workout');
+  //     const elId = workoutEl.dataset.id;
+  //     const workout = this.#workouts.find(work => work.id === elId);
+  //     const workoutIndex = this.#workouts.indexOf(workout);
+
+  //     // remove workout from array
+  //     this.#workouts.splice(workoutIndex, 1);
+
+  //     // remove workout from list
+  //     workoutEl.remove();
+  //     // form.addEventListener('submit', this._newWorkout.bind(this));
+  //     // inputType.addEventListener('change', this._toggleElevationField);
+  //   };
+  //   body.removeEventListener('click', editW);
+  //   body.addEventListener('click', editW.bind(this));
+
+  //   // delete workout which user wants to edit
+
+  //   // Re-appear form(exist values typed version)
+  // }
+
   _deleteWorkout(e) {
     // Guard clause
-    if (!e.target.className === 'workout-delete--button') return;
+    if (!(e.target.className === 'workout-delete--button')) return;
+
     const workoutEl = e.target.closest('li');
 
     // Guard clause
@@ -344,7 +374,6 @@ class App {
 
     // remove workout from array
     this.#workouts.splice(workoutIndex, 1);
-    console.log(this.#workouts);
 
     // remove workout from list
     workoutEl.remove();
