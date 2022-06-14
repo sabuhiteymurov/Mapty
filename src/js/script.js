@@ -350,12 +350,12 @@ class App {
   //     // form.addEventListener('submit', this._newWorkout.bind(this));
   //     // inputType.addEventListener('change', this._toggleElevationField);
   //   };
-  //   body.removeEventListener('click', editW);
   //   body.addEventListener('click', editW.bind(this));
+  //   body.removeEventListener('click', editW);
 
   //   // delete workout which user wants to edit
 
-  //   // Re-appear form(exist values typed version)
+  //   // Re-appear form(existed values typed version)
   // }
 
   _deleteWorkout(e) {
@@ -402,3 +402,9 @@ class App {
 }
 
 const app = new App();
+
+// Edit Workout steps:
+// Users have to click Edit button;
+// Then users have to select the workout to edit;
+// Selected workout will disappear and form with current values appears instead of workout
+// User types desired values and submits, workout appears again with new values.

@@ -215,12 +215,12 @@ a:visited {
 
 .github-link:link,
 .github-link:visited {
-  color: #ff6a33;
+  color: #ff5349;
 }
 
 .github-link:hover,
 .github-link:active {
-  color: #ffa280;
+  color: #ff8780;
 }
 
 .twitter-link:link,
