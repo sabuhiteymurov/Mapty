@@ -1,13 +1,12 @@
-:root {
-  --color-brand--1: #ffb545;
-  --color-brand--2: #00c46a;
+// COLORS
+$color-brand--1: #ffb545;
+$color-brand--2: #00c46a;
 
-  --color-dark--1: #2d3439;
-  --color-dark--2: #42484d;
-  --color-light--1: #aaa;
-  --color-light--2: #ececec;
-  --color-light--3: rgb(214, 222, 224);
-}
+$color-dark--1: #2d3439;
+$color-dark--2: #42484d;
+$color-light--1: #aaa;
+$color-light--2: #ececec;
+$color-light--3: rgb(214, 222, 224);
 
 * {
   margin: 0;
@@ -22,7 +21,7 @@ html {
 
 body {
   font-family: 'Manrope', sans-serif;
-  color: var(--color-light--2);
+  color: $color-light--2;
   font-weight: 400;
   line-height: 1.6;
   height: 100vh;
@@ -37,13 +36,13 @@ body {
 /* GENERAL */
 a:link,
 a:visited {
-  color: var(--color-brand--1);
+  color: $color-brand--1;
 }
 
 /* SIDEBAR */
 .sidebar {
   flex-basis: 50rem;
-  background-color: var(--color-dark--1);
+  background-color: $color-dark--1;
   padding: 3rem 5rem 4rem 5rem;
   display: flex;
   flex-direction: column;
@@ -76,7 +75,7 @@ a:visited {
 
 .workout__setting {
   font-size: 1.5rem;
-  background-color: var(--color-dark--2);
+  background-color: $color-dark--2;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -91,7 +90,7 @@ a:visited {
 
 .workout {
   position: relative;
-  background-color: var(--color-dark--2);
+  background-color: $color-dark--2;
   border-radius: 5px;
   padding: 1.5rem 2.25rem;
   margin-bottom: 1.75rem;
@@ -102,10 +101,10 @@ a:visited {
   gap: 0.75rem 1.5rem;
 }
 .workout--running {
-  border-left: 5px solid var(--color-brand--2);
+  border-left: 5px solid $color-brand--2;
 }
 .workout--cycling {
-  border-left: 5px solid var(--color-brand--1);
+  border-left: 5px solid $color-brand--1;
 }
 
 .workout__title {
@@ -143,13 +142,13 @@ a:visited {
 
 .workout__unit {
   font-size: 1.1rem;
-  color: var(--color-light--1);
+  color: $color-light--1;
   text-transform: uppercase;
   font-weight: 800;
 }
 
 .form {
-  background-color: var(--color-dark--2);
+  background-color: $color-dark--2;
   border-radius: 5px;
   padding: 1.5rem 2.75rem;
   margin-bottom: 1.75rem;
@@ -193,7 +192,7 @@ a:visited {
   font-size: 1.4rem;
   border: none;
   border-radius: 3px;
-  background-color: var(--color-light--3);
+  background-color: $color-light--3;
   transition: all 0.2s;
 }
 
@@ -210,7 +209,7 @@ a:visited {
   margin-top: auto;
   font-size: 1.3rem;
   text-align: center;
-  color: var(--color-light--1);
+  color: $color-light--1;
 }
 
 .github-link:link,
@@ -225,26 +224,26 @@ a:visited {
 
 .twitter-link:link,
 .twitter-link:visited {
-  color: var(--color-light--1);
+  color: $color-light--1;
   transition: all 0.2s;
 }
 
 .twitter-link:hover,
 .twitter-link:active {
-  color: var(--color-light--2);
+  color: $color-light--2;
 }
 
 /* MAP */
 #map {
   flex: 1;
   height: 100%;
-  background-color: var(--color-light--1);
+  background-color: $color-light--1;
 }
 
 /* Popup width is defined in JS using options */
 .leaflet-popup .leaflet-popup-content-wrapper {
-  background-color: var(--color-dark--1);
-  color: var(--color-light--2);
+  background-color: $color-dark--1;
+  color: $color-light--2;
   border-radius: 5px;
   padding-right: 0.6rem;
 }
@@ -254,12 +253,12 @@ a:visited {
 }
 
 .leaflet-popup .leaflet-popup-tip {
-  background-color: var(--color-dark--1);
+  background-color: $color-dark--1;
 }
 
 .running-popup .leaflet-popup-content-wrapper {
-  border-left: 5px solid var(--color-brand--2);
+  border-left: 5px solid $color-brand--2;
 }
 .cycling-popup .leaflet-popup-content-wrapper {
-  border-left: 5px solid var(--color-brand--1);
+  border-left: 5px solid $color-brand--1;
 }
