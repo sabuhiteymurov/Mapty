@@ -12,7 +12,7 @@ Mapty app
 
 ## Built with
 * Semantic HTML5 markup
-* CSS custom properties
+* SCSS custom properties
 * Parcel, Babel
 * Generate map from leaflet library
 * GeoCode location data from geocode.xyz API
