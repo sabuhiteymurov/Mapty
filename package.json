@@ -13,6 +13,7 @@
   "author": "Sabuhi Teymurov",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^4.1.1",
     "parcel": "^2.5.0"
   },
   "devDependencies": {
