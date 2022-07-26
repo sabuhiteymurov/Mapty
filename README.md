@@ -31,6 +31,13 @@ Mapty app
 - Improved the UI
 - Removed sort button, added sort select option
 
+### Update patches for 0.9
+
+#### Big improvements:
+
+- Added sort workouts functionality (Distance & Duration)
+- Implemented dynamic input values when editing workout
+
 ## License
 
 This project is based on [Jonas Schmedtmann's](https://twitter.com/jonasschmedtman) Mapty project.
