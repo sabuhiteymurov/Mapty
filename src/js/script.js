@@ -64,6 +64,7 @@ class Cycling extends Workout {
 
 const body = document.querySelector('body');
 const form = document.querySelector('.form');
+const addedWorkoutsContainer = document.querySelector('.workout-elements');
 const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
 const inputDistance = document.querySelector('.form__input--distance');
@@ -74,7 +75,6 @@ const deleteAllButton = document.querySelector('.delete__all');
 const deleteWorkoutButton = document.querySelector('.workout-delete--button');
 const editWorkoutButton = document.querySelector('.workout-edit--button');
 const sortWorkoutEl = document.querySelector('.workout__setting-sort');
-const workoutElements = document.querySelectorAll('.workout');
 
 class App {
   #map;
@@ -105,8 +105,6 @@ class App {
 
     body.addEventListener('click', this._deleteWorkout.bind(this));
     body.addEventListener('click', this._editWorkout.bind(this));
-
-    // editWorkoutButton.addEventListener('click', this._editWorkout.bind(this));
   }
 
   _getPosition() {
@@ -122,7 +120,6 @@ class App {
   _loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    // console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
     const coords = [latitude, longitude];
 
@@ -180,7 +177,6 @@ class App {
     if (!this.#mapEvent) {
       lat = this.#editedWorkout.coords[0];
       lng = this.#editedWorkout.coords[1];
-      console.log(this.#editedWorkout);
     } else {
       lat = this.#mapEvent.latlng.lat;
       lng = this.#mapEvent.latlng.lng;
@@ -338,7 +334,7 @@ class App {
       </li>
       `;
 
-    form.insertAdjacentHTML('afterend', html);
+    addedWorkoutsContainer.insertAdjacentHTML('afterbegin', html);
   }
 
   _moveToPopup(e) {
@@ -421,7 +417,6 @@ class App {
         inputElevation
           .closest('.form__row')
           .classList.remove('form__row--hidden');
-        console.log(workout);
         inputElevation.value = workout.elevationGain;
       }
       inputDistance.value = workout.distance;
@@ -434,8 +429,51 @@ class App {
   }
 
   _sortWorkout() {
-    console.log(sortWorkoutEl.value);
+    const deepNodeClones = [];
+    containerWorkouts
+      .querySelectorAll('.workout')
+      .forEach(el => deepNodeClones.push(el.cloneNode(true)));
+
+    const workoutElements = Array.from(deepNodeClones);
+
+    if (workoutElements.length === 0) return;
+
     if (sortWorkoutEl.value === 'distance') {
+      this.#workouts.sort((prev, next) => {
+        if (prev.distance > next.distance) return -1;
+        else if (prev.distance === next.distance) return 0;
+        else return 1;
+      });
+      const sortedByDistance = [];
+      this.#workouts.forEach((workout, i) => {
+        const sortedEl = workoutElements.find(wEl => {
+          return workout.id === wEl.dataset.id;
+        });
+        sortedByDistance.push(sortedEl);
+      });
+
+      addedWorkoutsContainer.innerHTML = '';
+      sortedByDistance.forEach(nodeEl => {
+        addedWorkoutsContainer.appendChild(nodeEl);
+      });
+    } else if (sortWorkoutEl.value === 'duration') {
+      this.#workouts.sort((prev, next) => {
+        if (prev.duration > next.duration) return -1;
+        else if (prev.duration === next.duration) return 0;
+        else return 1;
+      });
+      const sortedByDuration = [];
+      this.#workouts.forEach(workout => {
+        const sortedEl = workoutElements.find(wEl => {
+          return workout.id === wEl.dataset.id;
+        });
+        sortedByDuration.push(sortedEl);
+      });
+
+      addedWorkoutsContainer.innerHTML = '';
+      sortedByDuration.forEach(nodeEl => {
+        addedWorkoutsContainer.appendChild(nodeEl);
+      });
     }
   }
 
