@@ -92,6 +92,8 @@ class App {
     // Get data from local storage
     this._getLocalStorage();
 
+    // Check if workouts exist
+    this._checkSortElement();
     // Attach event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
     sortWorkoutEl.addEventListener('change', this._sortWorkout.bind(this));
@@ -105,6 +107,18 @@ class App {
 
     body.addEventListener('click', this._deleteWorkout.bind(this));
     body.addEventListener('click', this._editWorkout.bind(this));
+  }
+
+  _checkSortElement() {
+    if (this.#workouts.length === 0) {
+      document.querySelectorAll('#sort-option').forEach(o => {
+        o.disabled = true;
+      });
+    } else {
+      document.querySelectorAll('#sort-option').forEach(o => {
+        o.disabled = false;
+      });
+    }
   }
 
   _getPosition() {
@@ -241,6 +255,7 @@ class App {
 
     // Set local storage to all workouts
     this._setLocalStorage();
+    this._checkSortElement();
   }
 
   _renderWorkoutMarker(workout) {
@@ -355,6 +370,7 @@ class App {
   }
 
   _deleteAllWorkouts() {
+    if (this.#workouts.length === 0) return;
     this.reset();
   }
 
@@ -502,6 +518,7 @@ class App {
 
     // update local storage
     this._setLocalStorage();
+    this._checkSortElement();
   }
 
   _clearMarker(id) {
