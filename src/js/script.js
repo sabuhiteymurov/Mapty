@@ -73,6 +73,8 @@ const inputElevation = document.querySelector('.form__input--elevation');
 const deleteAllButton = document.querySelector('.delete__all');
 const deleteWorkoutButton = document.querySelector('.workout-delete--button');
 const editWorkoutButton = document.querySelector('.workout-edit--button');
+const sortWorkoutEl = document.querySelector('.workout__setting-sort');
+const workoutElements = document.querySelectorAll('.workout');
 
 class App {
   #map;
@@ -92,6 +94,7 @@ class App {
 
     // Attach event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
+    sortWorkoutEl.addEventListener('change', this._sortWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
 
@@ -131,7 +134,7 @@ class App {
     }).addTo(this.#map);
 
     // Handling clicks on map
-    this.#map.on('click', this._showForm.bind(this));
+    this.#map.on('dblclick', this._showForm.bind(this));
 
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
@@ -155,6 +158,8 @@ class App {
   }
 
   _toggleElevationField() {
+    inputCadence.value = '';
+    inputElevation.value = '';
     inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
     inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
   }
@@ -223,6 +228,7 @@ class App {
 
       // update local storage
       this._setLocalStorage();
+      this.#editedWorkout = null;
     }
 
     // Add new object to workout array
@@ -394,19 +400,43 @@ class App {
     const workoutIndex = this.#workouts.indexOf(workout);
 
     // Edit Workout steps:
-    // Users have to click Edit button before clicking on the map;
+    // Users have to click Edit button before double clicking on the map;
     // Then selected workout inputs will be activated;
     // User types desired values and submits, workout appears again with new values.
 
-    form.classList.remove('hidden');
-    inputDistance.value = workout.distance;
-    inputDuration.value = workout.duration;
+    if (this.#editedWorkout ? this.#editedWorkout.id === workout.id : false) {
+      workoutEl.querySelector('.workout-edit--button').disabled = true;
+    } else {
+      form.classList.remove('hidden');
+      if (workout.type === 'running') {
+        inputType.value = 'running';
+        inputCadence
+          .closest('.form__row')
+          .classList.remove('form__row--hidden');
+        inputElevation.closest('.form__row').classList.add('form__row--hidden');
+        inputCadence.value = workout.cadence;
+      } else {
+        inputType.value = 'cycling';
+        inputCadence.closest('.form__row').classList.add('form__row--hidden');
+        inputElevation
+          .closest('.form__row')
+          .classList.remove('form__row--hidden');
+        console.log(workout);
+        inputElevation.value = workout.elevationGain;
+      }
+      inputDistance.value = workout.distance;
+      inputDuration.value = workout.duration;
 
-    if (workout.cadence) inputCadence.value = workout.cadence;
+      inputDistance.focus();
+      this.#editedWorkout = workout;
+      this.#editedWorkoutEl = workoutEl;
+    }
+  }
 
-    inputDistance.focus();
-    this.#editedWorkout = workout;
-    this.#editedWorkoutEl = workoutEl;
+  _sortWorkout() {
+    console.log(sortWorkoutEl.value);
+    if (sortWorkoutEl.value === 'distance') {
+    }
   }
 
   _deleteWorkout(e) {
