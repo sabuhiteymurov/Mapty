@@ -37,6 +37,7 @@ Mapty app
 
 - Added sort workouts functionality (Distance & Duration)
 - Implemented dynamic input values when editing workout
+- Fixed minor bugs
 
 ## License
 
