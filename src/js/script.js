@@ -110,7 +110,7 @@ class App {
   }
 
   _checkSortElement() {
-    if (this.#workouts.length === 0) {
+    if (this.#workouts.length < 2) {
       document.querySelectorAll('#sort-option').forEach(o => {
         o.disabled = true;
       });
