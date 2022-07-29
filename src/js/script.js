@@ -188,7 +188,7 @@ class App {
     let lat, lng;
 
     // For editing workout
-    if (!this.#mapEvent) {
+    if (this.#editedWorkout) {
       lat = this.#editedWorkout.coords[0];
       lng = this.#editedWorkout.coords[1];
     } else {
@@ -225,7 +225,7 @@ class App {
     }
 
     // For editing workout
-    if (!this.#mapEvent) {
+    if (this.#editedWorkout) {
       this.#workouts = this.#workouts.filter(
         workout => this.#editedWorkout.id !== workout.id
       );
@@ -238,7 +238,7 @@ class App {
 
       // update local storage
       this._setLocalStorage();
-      this.#editedWorkout = null;
+      this.#editedWorkout = false;
     }
 
     // Add new object to workout array
