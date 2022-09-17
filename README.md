@@ -32,6 +32,7 @@ Mapty app
 - Removed sort button, added sort select option
 
 ### Update patches for 0.9
+- Initial release
 
 #### Big improvements:
 
